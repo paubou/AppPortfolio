@@ -1,22 +1,20 @@
 <template>
   <div class="container">
     <a href="https://github.com/pbouigue/AppPortfolio">link to gh repo</a>
-    <div
+    <!-- <div
       v-for="(filteredArticles, categoryKey) in groupedCategories"
       :key="categoryKey"
       class="l"
     >
-      {{ categoryKey }}
-      <!-- <div v-for="article in filteredArticles" :key="article.slug"> -->
-      <CategoryWrapper
-        v-for="article in filteredArticles"
-        :key="article.slug"
-        :title="article.title"
-        :body="article.img"
-        @click="a"
-      />
-      </CategoryWrapper>
+      {{ categoryKey }} -->
+    <!-- <div v-for="article in filteredArticles" :key="article.slug"> -->
+    <div
+      v-for="(filteredArticles, categoryKey) in groupedCategories"
+      :key="categoryKey"
+    >
+      <CategoryWrapper :title="categoryKey" />
     </div>
+  </div>
   </div>
 </template>
 
