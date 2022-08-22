@@ -1,56 +1,63 @@
 <template>
   <div class="container">
-    <div v-for="(color, index) in colors" :key="color.test">
-      {{ color.test }} {{ index }}
-
-      <div v-for="accordion in accordions" :key="accordion.title" class="l" :style=" color.test">
-        <Item>
-          <template #title>
-            {{ accordion.title }}
-          </template>
-
-          <template #content>
-            <div>{{ accordion.text }}</div>
-          </template>
-        </Item>
-      </div>
-      <!-- here goes R -->
-      <div class="r">
-        <p> contenu pour R</p>
+    <div v-for="(filteredArticles, categoryKey) in groupedCategories" :key="categoryKey" class="l">
+      <div v-for="article in filteredArticles" :key="article.slug">
+        <div
+          :class="{ active: isActive }"
+          @click="toggle"
+        >
+          <a class="title">
+            {{ categoryKey }}
+          </a>
+          <div v-show="show" :class="{ active: isActive }" class="content">
+            <img :src="require(`~/assets/${article.img}`)" alt="">
+          </div>
+          <br>
+        </div>
+        <hr>
       </div>
     </div>
   </div>
-  </div>
 </template>
+
 <script>
-import Item from '../components/List-item.vue'
 export default {
-  components: { Item },
+  async asyncData ({ $content }) {
+    const articles = await $content('', { deep: true })
+      .only(['title', 'description', 'img', 'slug', 'cat', 'dir'])
+      .sortBy('createdAt', 'asc')
+      .fetch()
+
+    return { articles }
+  },
   data () {
     return {
-      accordions: [
-        {
-          title: 'Il écrit',
-          text: 'Projects from il écrit'
-        },
-        {
-          title: 'Il chante',
-          text: 'Projects from il chante'
-        },
-        {
-          title: 'Il danse',
-          text: 'Projects from il danse !'
-        }
-      ],
       colors: [
-        { test: 'color: red' },
-        { test: 'color: orange' }
-      ]
+        { ping: 'color: red' },
+        { ping: 'color: orange' }
+      ],
+      isActive: false,
+      show: true
 
     }
+  },
+  computed: {
+    groupedCategories () {
+      return this.articles.reduce((finalObject, obj) => {
+        const directory = obj.dir
+        finalObject[directory] ?? (finalObject[directory] = [])
+        finalObject[directory].push(obj)
+        return finalObject
+      }, {})
+    }
+  },
+  methods: {
+    toggle () {
+      this.isActive = !this.isActive
+    }
   }
-
 }
+
 </script>
 
 <style>
@@ -98,15 +105,15 @@ a:hover{
 
 .wrapper{
     overflow: hidden;
-    max-height: 500px;
+    max-height: 5000px;
 
   }
 .content.active{
-  max-height: 500px;
+  max-height: 5000px;
    transition-property: width, max-height;
-  transition-duration: 1s, 2s;
+  transition-duration: 400ms, 1s;
   transition-timing-function: cubic-bezier(0.305, 0.000, 0.000, 1.015);
-  transition-delay: 0, 3s;
+  transition-delay: 0s, 400ms;
   /* transition: width 700ms cubic-bezier(0.305, 0.000, 0.000, 1.015), height 2s; custom */
   width: 70vw;
 }
@@ -116,10 +123,15 @@ a:hover{
   max-height: 0;
   transition-property: width, max-height;
   transition-timing-function: cubic-bezier(0.305, 0.000, 0.000, 1.015);
-  transition-duration: 2s, 1s;
-  transition-delay: 1s, 0;
+  transition-duration: 400ms, 1s;
+  transition-delay: 10s, 0;
   /* transition: width 700ms cubic-bezier(0.305, 0.000, 0.000, 1.015), height 2s; custom */
 
+}
+
+img{
+  width:100%;
+  height: 100%;
 }
 
 </style>
