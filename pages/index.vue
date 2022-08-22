@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <a href="https://github.com/pbouigue/AppPortfolio">link to Github repo</a>
     <div v-for="(filteredArticles, categoryKey) in groupedCategories" :key="categoryKey" class="l">
       <div v-for="article in filteredArticles" :key="article.slug">
         <div
