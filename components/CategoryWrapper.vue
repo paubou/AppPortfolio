@@ -4,12 +4,12 @@
       :class="{ active: isActive }"
       @click="toggle"
     >
-      <a class="title">
-        <slot name="title" />
+      <a class="rien">
+        {{ title }}
       </a>
 
       <div v-show="show" :class="{ active: isActive }" class="content">
-        <slot name="content" />
+        <img :src="require(`~/assets/${ body }`)" alt="">
       </div>
     </div>
   </div>
@@ -18,6 +18,10 @@
 <script>
 export default {
   components: {},
+  props: {
+    title: String,
+    body: String
+  },
   data () {
     return {
       isActive: false,
@@ -29,7 +33,6 @@ export default {
 
     },
     toggle () {
-      // this.show = !this.show
       console.log('ping')
       this.isActive = !this.isActive
     }

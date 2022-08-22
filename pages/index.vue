@@ -1,34 +1,34 @@
 <template>
   <div class="container">
-    <a href="https://github.com/pbouigue/AppPortfolio">link to Github repo</a>
-    <div v-for="(filteredArticles, categoryKey) in groupedCategories" :key="categoryKey" class="l">
-      <div v-for="article in filteredArticles" :key="article.slug">
-        <div
-          :class="{ active: isActive }"
-          @click="toggle"
-        >
-          <a class="title">
-            {{ categoryKey }}
-          </a>
-          <div v-show="show" :class="{ active: isActive }" class="content">
-            <img :src="require(`~/assets/${article.img}`)" alt="">
-          </div>
-          <br>
-        </div>
-        <hr>
-      </div>
+    <a href="https://github.com/pbouigue/AppPortfolio">link to gh repo</a>
+    <div
+      v-for="(filteredArticles, categoryKey) in groupedCategories"
+      :key="categoryKey"
+      class="l"
+    >
+      {{ categoryKey }}
+      <!-- <div v-for="article in filteredArticles" :key="article.slug"> -->
+      <CategoryWrapper
+        v-for="article in filteredArticles"
+        :key="article.slug"
+        :title="article.title"
+        :body="article.img"
+        @click="a"
+      />
+      </CategoryWrapper>
     </div>
   </div>
 </template>
 
 <script>
+import CategoryWrapper from '../components/CategoryWrapper.vue'
 export default {
+  components: { CategoryWrapper },
   async asyncData ({ $content }) {
     const articles = await $content('', { deep: true })
       .only(['title', 'description', 'img', 'slug', 'cat', 'dir'])
       .sortBy('createdAt', 'asc')
       .fetch()
-
     return { articles }
   },
   data () {
@@ -39,7 +39,6 @@ export default {
       ],
       isActive: false,
       show: true
-
     }
   },
   computed: {
@@ -53,8 +52,9 @@ export default {
     }
   },
   methods: {
-    toggle () {
-      this.isActive = !this.isActive
+    a () {
+      alert('aeiou')
+      console.log('test')
     }
   }
 }
@@ -116,10 +116,11 @@ a:hover{
   transition-timing-function: cubic-bezier(0.305, 0.000, 0.000, 1.015);
   transition-delay: 0s, 400ms;
   /* transition: width 700ms cubic-bezier(0.305, 0.000, 0.000, 1.015), height 2s; custom */
-  width: 70vw;
+  width: 20vw;
 }
 
 .content{
+  color: blue;
   width: 0px;
   max-height: 0;
   transition-property: width, max-height;
