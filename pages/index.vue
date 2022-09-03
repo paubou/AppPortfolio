@@ -1,25 +1,38 @@
 <template>
   <div class="container">
-    <a href="https://github.com/pbouigue/AppPortfolio">link to gh repo</a>
-    <!-- <div
-      v-for="(filteredArticles, categoryKey) in groupedCategories"
-      :key="categoryKey"
-      class="l"
-    >
-      {{ categoryKey }} -->
-    <!-- <div v-for="article in filteredArticles" :key="article.slug"> -->
-    <div
-      v-for="(filteredArticles, categoryKey) in groupedCategories"
-      :key="categoryKey"
-    >
-      <CategoryWrapper :title="categoryKey" />
+    <div class="left">
+      <section
+        v-for="(filteredArticles, categoryKey, index) in First"
+        :id="'item' + index"
+        :key="categoryKey"
+        @click="changeCategory(categoryKey)"
+      >
+        <CategoryWrapper
+          :title="categoryKey"
+          :is-active="categoryKey === activeCategory"
+          :articles=" filteredArticles"
+        />
+      </section>
     </div>
-  </div>
+    <class class="right">
+      <section
+        v-for="(filteredArticles, categoryKey, index) in Second"
+        :id="'item' + index"
+        :key="categoryKey"
+        @click="changeCategory(categoryKey)"
+      >
+        <CategoryWrapper
+          :title="categoryKey"
+          :is-active="categoryKey === activeCategory"
+          :articles=" filteredArticles"
+        />
+      </section>
+    </class>
   </div>
 </template>
 
 <script>
-import CategoryWrapper from '../components/CategoryWrapper.vue'
+import CategoryWrapper from '~/components/CategoryWrapper.vue'
 export default {
   components: { CategoryWrapper },
   async asyncData ({ $content }) {
@@ -36,31 +49,52 @@ export default {
         { ping: 'color: orange' }
       ],
       isActive: false,
-      show: true
+      activeCategory: null
     }
   },
   computed: {
     groupedCategories () {
       return this.articles.reduce((finalObject, obj) => {
-        const directory = obj.dir
+        const directory = obj.dir.slice(1)
         finalObject[directory] ?? (finalObject[directory] = [])
         finalObject[directory].push(obj)
         return finalObject
       }, {})
+    },
+    First () {
+      console.log(Object.entries(this.groupedCategories))
+      return Object.fromEntries(Object.entries(this.groupedCategories).slice(0, 5))
+    },
+    Second () {
+      console.log(Object.entries(this.groupedCategories))
+      return Object.fromEntries(Object.entries(this.groupedCategories).slice(5, 100))
     }
+
   },
   methods: {
-    a () {
-      alert('aeiou')
-      console.log('test')
+    changeCategory (key) {
+      if (this.activeCategory === key) {
+        this.activeCategory = null
+      } else {
+        this.activeCategory = key
+        console.log(this)
+      }
+      // this.isActive = !this.isActive
+    },
+    debug (categoryKey, activeCategory) {
+      // console.log(categoryKey === activeCategory)
+      // console.log(categoryKey)
+      // console.log(activeCategory)
+      return categoryKey === activeCategory
     }
   }
+
 }
 
 </script>
 
 <style>
-body{
+ body{
   font-family:sans-serif;
   font-weight: normal;
   color: rgb(189, 183, 107);
@@ -85,46 +119,53 @@ p{
 }
 .container{
   display: grid;
-  grid-template-columns: repeat(10,auto);
+  grid-template-columns: repeat(1, auto);
   grid-gap: 0 1em;
 }
 
-.l{
+/* #item10 {
+  grid-column: 2;
+} */
+
+.left{
+  grid-row-start: 1 ;
   grid-column: 1;
 }
 
-.r{
+.right{
+  grid-row-start: 1 ;
   grid-column: 2/4;
-  grid-row: 1;
 }
 
 a:hover{
   cursor: pointer;
 }
 
-.wrapper{
+/* .cat{
     overflow: hidden;
     max-height: 5000px;
 
-  }
+  } */
 .content.active{
+  display: block;
   max-height: 5000px;
    transition-property: width, max-height;
-  transition-duration: 400ms, 1s;
+  transition-duration: 400ms, 100ms;
   transition-timing-function: cubic-bezier(0.305, 0.000, 0.000, 1.015);
-  transition-delay: 0s, 400ms;
-  /* transition: width 700ms cubic-bezier(0.305, 0.000, 0.000, 1.015), height 2s; custom */
-  width: 20vw;
+  transition-delay: 400ms, 100ms;
+    width: 80vw;
+ background: orange;
 }
 
 .content{
-  color: blue;
   width: 0px;
-  max-height: 0;
-  transition-property: width, max-height;
+  max-height: 10px;
+  /* transition-property: width, max-height;
   transition-timing-function: cubic-bezier(0.305, 0.000, 0.000, 1.015);
-  transition-duration: 400ms, 1s;
-  transition-delay: 10s, 0;
+  transition-duration: 400ms, 100ms;
+  transition-delay: 10s, 0s; */
+   background: orange;
+   display: none;
   /* transition: width 700ms cubic-bezier(0.305, 0.000, 0.000, 1.015), height 2s; custom */
 
 }
@@ -134,4 +175,11 @@ img{
   height: 100%;
 }
 
+.right section:last-of-type{
+  display: inline;
+}
+
+#item5 > .cat > .title {
+  float: left;
+}
 </style>

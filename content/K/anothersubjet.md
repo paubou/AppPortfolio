@@ -1,7 +1,7 @@
 ---
-title: premier
-cat: A
-img: 1.jpg
+title: Paul Bouigue est un ancien étudiant, etc...
+cat: Il mange avec les mains
+img: 4.png
 ---
 
 Empower your NuxtJS application with `@nuxtjs/content` module: write in a `content/` directory and fetch your Markdown, JSON, YAML and CSV files through a MongoDB like API, acting as a **Git-based Headless CMS**.

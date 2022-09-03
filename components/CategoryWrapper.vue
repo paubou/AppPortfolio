@@ -1,40 +1,47 @@
 <template>
-  <div class="wrapper">
+  <div class="cat" :class="{ active: isActive }">
     <div
+      class="title"
       :class="{ active: isActive }"
-      @click="toggle"
+      @click="
+        changeComponent()"
     >
-      <a class="rien">
-        {{ title }}
-      </a>
-
-      <div v-show="show" :class="{ active: isActive }" class="content">
-        <img :src="require(`~/assets/${ body }`)" alt="">
-      </div>
+      <a>{{ title }}</a>
+      {{ id }}
+    </div>
+    <div v-show="isActive" :class="{ active: isActive }" class="content">
+      <swiperImg
+        :articles="articles"
+      />
     </div>
   </div>
 </template>
 
 <script>
+import SwiperImg from './swiperImg.vue'
 export default {
-  components: {},
+  components: { SwiperImg },
   props: {
-    title: String,
-    body: String
+    title: {
+      type: String,
+      default: 'Il...'
+    },
+    isActive: {
+      type: Boolean,
+      default: false
+    },
+    articles: {
+      type: Object
+    }
+
   },
   data () {
     return {
-      isActive: false,
-      show: true
     }
   },
   methods: {
-    myFiler () {
-
-    },
-    toggle () {
-      console.log('ping')
-      this.isActive = !this.isActive
+    changeComponent () {
+      this.$emit('listenButtonEvent')
     }
   }
 }
@@ -42,5 +49,8 @@ export default {
 </script>
 
 <style>
+.title.active{
+  color:brown;
+}
 
 </style>
