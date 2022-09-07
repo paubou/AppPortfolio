@@ -1,47 +1,61 @@
 <template>
-  <div class="container">
-    <div class="left">
-      <section
-        v-for="(filteredArticles, categoryKey, index) in First"
-        :id="'item' + index"
-        :key="categoryKey"
-        @click="changeCategory(categoryKey)"
-      >
-        <CategoryWrapper
-          :title="categoryKey"
-          :is-active="categoryKey === activeCategory"
-          :articles=" filteredArticles"
-        />
-      </section>
+  <main>
+    <Transition>
+      <div v-if="introOpened" class="imageIntro" @click="introOpened = false">
+        <Intro />
+      </div>
+    </Transition>
+
+    <div v-show="!introOpened" class="container">
+      <p class="thanks">
+        thanks to <a href="https://snai.pe">snaipe uwu</a>
+      </p>
+      <div class="left">
+        <section
+          v-for="(filteredArticles, categoryKey, index) in First"
+          :id="'item' + index"
+          :key="categoryKey"
+        >
+          <CategoryWrapper
+            :title="categoryKey"
+            :is-active="categoryKey === activeCategory"
+            :articles=" filteredArticles"
+            @listenButtonEvent="changeCategory(categoryKey)"
+          />
+        </section>
+      </div>
+      <class class="right">
+        <section
+          v-for="(filteredArticles, categoryKey, index) in Second"
+          :id="'item' + index"
+          :key="categoryKey"
+        >
+          <CategoryWrapper
+            :title="categoryKey"
+            :is-active="categoryKey === activeCategory"
+            :articles=" filteredArticles"
+            @listenButtonEvent="changeCategory(categoryKey)"
+          />
+        </section>
+      </class>
     </div>
-    <class class="right">
-      <section
-        v-for="(filteredArticles, categoryKey, index) in Second"
-        :id="'item' + index"
-        :key="categoryKey"
-        @click="changeCategory(categoryKey)"
-      >
-        <CategoryWrapper
-          :title="categoryKey"
-          :is-active="categoryKey === activeCategory"
-          :articles=" filteredArticles"
-        />
-      </section>
-    </class>
-  </div>
+  </main>
 </template>
 
 <script>
 import CategoryWrapper from '~/components/CategoryWrapper.vue'
+import Intro from '~/components/Intro.vue'
 export default {
-  components: { CategoryWrapper },
+  components: { CategoryWrapper, Intro },
+
   async asyncData ({ $content }) {
     const articles = await $content('', { deep: true })
-      .only(['title', 'description', 'img', 'slug', 'cat', 'dir'])
-      .sortBy('createdAt', 'asc')
+      .sortBy('path', 'asc')
+      .only(['title', 'description', 'img', 'slug', 'informations', 'dir'])
       .fetch()
     return { articles }
   },
+
   data () {
     return {
       colors: [
@@ -49,13 +63,14 @@ export default {
         { ping: 'color: orange' }
       ],
       isActive: false,
-      activeCategory: null
+      activeCategory: null,
+      introOpened: true
     }
   },
   computed: {
     groupedCategories () {
       return this.articles.reduce((finalObject, obj) => {
-        const directory = obj.dir.slice(1)
+        const directory = obj.dir.slice(3)
         finalObject[directory] ?? (finalObject[directory] = [])
         finalObject[directory].push(obj)
         return finalObject
@@ -67,7 +82,7 @@ export default {
     },
     Second () {
       console.log(Object.entries(this.groupedCategories))
-      return Object.fromEntries(Object.entries(this.groupedCategories).slice(5, 100))
+      return Object.fromEntries(Object.entries(this.groupedCategories).slice(5, 9))
     }
 
   },
@@ -94,6 +109,13 @@ export default {
 </script>
 
 <style>
+.imageIntro{
+  background:red;
+}
+
+.title.active{
+  color: brown;
+}
  body{
   font-family:sans-serif;
   font-weight: normal;
@@ -110,6 +132,11 @@ a{
   margin: 0;
 }
 
+.thanks {
+  position: fixed;
+  right: 0.2em;
+}
+
 .active>a{
   color:brown;
 }
@@ -119,7 +146,7 @@ p{
 }
 .container{
   display: grid;
-  grid-template-columns: repeat(1, auto);
+  grid-template-columns: repeat(6, 1fr);;
   grid-gap: 0 1em;
 }
 
@@ -146,40 +173,46 @@ a:hover{
     max-height: 5000px;
 
   } */
-.content.active{
-  display: block;
+.content.active {
   max-height: 5000px;
-   transition-property: width, max-height;
-  transition-duration: 400ms, 100ms;
+  width: 50vw;
+  display: block;
+  transition-property: width, max-height;
   transition-timing-function: cubic-bezier(0.305, 0.000, 0.000, 1.015);
-  transition-delay: 400ms, 100ms;
-    width: 80vw;
- background: orange;
+  transition-duration: 300ms, 2s;
+  transition-delay: 00ms, 500ms;
 }
 
-.content{
+.content {
+  max-height: 0;
   width: 0px;
-  max-height: 10px;
-  /* transition-property: width, max-height;
+  transition-property: max-height, width;
   transition-timing-function: cubic-bezier(0.305, 0.000, 0.000, 1.015);
-  transition-duration: 400ms, 100ms;
-  transition-delay: 10s, 0s; */
-   background: orange;
-   display: none;
-  /* transition: width 700ms cubic-bezier(0.305, 0.000, 0.000, 1.015), height 2s; custom */
-
+  transition-duration: 900ms, 500ms;
+  transition-delay: 00ms, 700ms;
+  overflow: hidden;
 }
 
 img{
   width:100%;
-  height: 100%;
 }
 
 .right section:last-of-type{
   display: inline;
+  color:grey
 }
 
 #item5 > .cat > .title {
   float: left;
 }
+
+.v-enter-active, .v-leave-active{
+        transition: opacity 0.5s ease;
+    }
+
+    .v-enter-from,
+    .v-leave-to {
+         opacity: 0;
+    }
+
 </style>

@@ -1,6 +1,6 @@
 ---
 title: second ping
-cat: A
+informations: A
 img: 3.jpg
 ---
 

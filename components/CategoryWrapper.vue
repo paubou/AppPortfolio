@@ -1,5 +1,5 @@
 <template>
-  <div class="cat" :class="{ active: isActive }">
+  <div class="cat">
     <div
       class="title"
       :class="{ active: isActive }"
@@ -9,7 +9,7 @@
       <a>{{ title }}</a>
       {{ id }}
     </div>
-    <div v-show="isActive" :class="{ active: isActive }" class="content">
+    <div :class="{ active: isActive }" class="content">
       <swiperImg
         :articles="articles"
       />
@@ -31,7 +31,8 @@ export default {
       default: false
     },
     articles: {
-      type: Object
+      type: Array,
+      default: null
     }
 
   },
