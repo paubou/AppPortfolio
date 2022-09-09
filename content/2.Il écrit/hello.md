@@ -1,6 +1,6 @@
 ---
-title: first test
-cat: B
+title: Diplôme
+informations: Impression risographie rouge, orange et noir, insert A3
 img: 2.jpg
 ---
 

@@ -1,0 +1,5 @@
+---
+title: Arlequin
+informations: format 105 × 165 mm, impression laser noir de 76 pages reliées en cahiers. Il est composé dans un caractère dessiné cette année, imprimé sur Olin Bulk 80g dans une main de 2, dedans, 3 inserts de couleur, jaune, vert et rouge sur l’impression noire. 
+img: Arlequin.jpg
+---

@@ -3,6 +3,7 @@
     <Transition>
       <div v-if="introOpened" class="imageIntro" @click="introOpened = false">
         <Intro />
+        <Colors />
       </div>
     </Transition>
 
@@ -45,8 +46,9 @@
 <script>
 import CategoryWrapper from '~/components/CategoryWrapper.vue'
 import Intro from '~/components/Intro.vue'
+import Colors from '~/components/Colors.vue'
 export default {
-  components: { CategoryWrapper, Intro },
+  components: { CategoryWrapper, Intro, Colors },
 
   async asyncData ({ $content }) {
     const articles = await $content('', { deep: true })
@@ -115,6 +117,8 @@ export default {
 
 .title.active{
   color: brown;
+  z-index: 1000;
+  position: relative;
 }
  body{
   font-family:sans-serif;
@@ -175,12 +179,14 @@ a:hover{
   } */
 .content.active {
   max-height: 5000px;
-  width: 50vw;
+  width: 70vw;
   display: block;
   transition-property: width, max-height;
   transition-timing-function: cubic-bezier(0.305, 0.000, 0.000, 1.015);
-  transition-duration: 300ms, 2s;
+  transition-duration: 600ms, 2s;
   transition-delay: 00ms, 500ms;
+  position: relative;
+  top: -1em;
 }
 
 .content {
@@ -188,9 +194,12 @@ a:hover{
   width: 0px;
   transition-property: max-height, width;
   transition-timing-function: cubic-bezier(0.305, 0.000, 0.000, 1.015);
-  transition-duration: 900ms, 500ms;
-  transition-delay: 00ms, 700ms;
+  transition-duration: 600ms, 600ms;
+  transition-delay: 00ms, 600ms;
   overflow: hidden;
+  position: relative;
+  top: -1em;
+
 }
 
 img{
@@ -199,7 +208,7 @@ img{
 
 .right section:last-of-type{
   display: inline;
-  color:grey
+  color:#ff1e00;
 }
 
 #item5 > .cat > .title {
