@@ -39,7 +39,8 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/content
-    '@nuxt/content'
+    '@nuxt/content',
+    '@blokwise/dynamic'
   ],
 
   // Content module configuration: https://go.nuxtjs.dev/config-content

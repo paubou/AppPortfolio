@@ -1,16 +1,16 @@
 <template>
   <div class="images">
-    <div v-for="article in articles.slice(0,1)" id="status" :key="article" class="status">
-      {{ article.title }}
+    <div class="status">
+      {{ content[current].title }}
     </div>
-    <div v-for="article in articles.slice(0, 1)" id="informations" :key="article" class="informations">
-      {{ article.informations }}
+    <div class="informations">
+      {{ content[current].informations }}
     </div>
     <div ref="swiper" class="swiper mySwiper">
       <div class="swiper-wrapper">
         <div
-          v-for="article in articles"
-          :key="article"
+          v-for="article in content"
+          :key="article.slug"
           class="swiper-slide"
           :data-title=" article.title"
           :data-informations=" article.informations"
@@ -39,9 +39,14 @@ import { Swiper, Navigation, Pagination, EffectCards, Autoplay, Keyboard, Mousew
 import 'swiper/swiper-bundle.min.css'
 export default {
   props: {
-    articles: {
+    content: {
       type: Array,
       default: null
+    }
+  },
+  data () {
+    return {
+      current: 0
     }
   },
   mounted () {
@@ -54,14 +59,16 @@ export default {
       preloadImages: false,
       // Enable lazy loading
       lazy: true,
-      // loadPrevNext: true,
+      // loopedSlides: 3,
+      initialSlide: 0,
+      loadPrevNext: true,
       // loadOnTransitionStart: true
-      loop: true,
-      slidesPerView: 'auto',
-      watchSlidesProgress: true,
+      loop: false,
+      slidesPerView: 1,
+      // watchSlidesProgress: true,
       spaceBetween: 0,
       speed: 400,
-      autoHeight: false,
+      autoHeight: true,
       grabCursor: true,
       // remove unused modules if needed
       modules: [Navigation, Pagination, EffectCards, Autoplay, Keyboard, Mousewheel, Lazy],
@@ -72,9 +79,6 @@ export default {
         clickable: false
       },
       // Autoplay if needed
-      autoplay: {
-        delay: 600
-      },
       // Navigation arrows if needed
       navigation: {
         nextEl: this.$refs.swipernext,
@@ -100,15 +104,47 @@ export default {
       }
     })
 
-    swiper.on('slideChange', function (slider) {
-      const textContentTitle = slider.slides[slider.activeIndex].dataset.title
-      const textContentInfos = slider.slides[slider.activeIndex].dataset.informations
-      console.log(textContentInfos)
-      const status = document.getElementById('status')
-      const informations = document.getElementById('informations')
-      status.textContent = textContentTitle
-      informations.textContent = textContentInfos
-    })
+    swiper.on('slideChange', this.onSlideChange)
+  },
+  methods: {
+    onSlideChange (slider) {
+      const current = slider.activeIndex
+      const slidesLength = this.$props.content.length
+      // const total = slider.params.loop
+      //   ? Math.ceil((slidesLength - slider.loopedSlides * 2) / slider.params.slidesPerGroup)
+      //   : slider.snapGrid.length
+
+      // if (slider.params.loop) {
+      //   current = Math.ceil(
+      //     (slider.activeIndex - slider.loopedSlides) / slider.params.slidesPerGroup
+      //   )
+      //   console.log(current)
+      //   if (current > slidesLength - 1 - slider.loopedSlides * 2) {
+      //     current -= slidesLength - slider.loopedSlides * 2
+      //   }
+      //   console.log(current)
+      //   if (current > total - 1) { current -= total }
+      //   console.log(current)
+      //   if (current < 0 && slider.params.paginationType !== 'bullets') { current = total + current }
+      //   console.log(current)
+      // } else if (typeof slider.snapIndex !== 'undefined') {
+      //   current = slider.snapIndex
+      // } else {
+      //   current = slider.activeIndex || 0
+      // }
+      if (current < slidesLength) {
+        this.$data.current = current
+      }
+      console.log(current, slider.activeIndex)
+
+      // const textContentTitle = slider.slides[slider.activeIndex].dataset.title
+      // const textContentInfos = slider.slides[slider.activeIndex].dataset.informations
+      // console.log(textContentInfos + textContentTitle)
+      // const status = $refs.status
+      // const informations = $refs.informations
+      // status.textContent = textContentTitle
+      // informations.textContent = textContentInfos
+    }
   }
 }
 </script>
@@ -140,11 +176,10 @@ export default {
 }
 
 .swiper-slide img {
-  height: 40vw;
+  height: 42vw;
   width: auto;
       }
 
-.swiper-slide-prev,
 .swiper-slide-visible,
 .swiper-slide-next,
 .swiper-slide-duplicate-prev,
@@ -187,7 +222,7 @@ opacity: 0;
   grid-row: 1;
   grid-column: 1/3;
   bottom:0px;
-  color: brown;
+color: var(--randomcolor);
 mix-blend-mode: difference;
 z-index: 0;
 }
@@ -211,18 +246,18 @@ z-index: 0;
 .swiper-slide:nth-child(1n) {
 }
 
-#status{
+.status{
   position: relative;
 z-index: 100;
-color: brown;
-mix-blend-mode: difference;
+color: var(--randomcolor);
 z-index: 0;
 
 }
 
-#informations{
+.informations{
   font-weight: normal;
-  color: brown;
+  color: var(--randomcolor);
   font-family: serif;
+  mix-blend-mode: difference;
 }
 </style>

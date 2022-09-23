@@ -1,10 +1,4 @@
-<template>
-  <div>
-    {{ colors }}
-  </div>
-</template>
 
-<script>
 export default {
   computed: {
     RandomColors () {
@@ -43,9 +37,3 @@ export default {
     }
   }
 }
-
-</script>
-
-<style>
-
-</style>

@@ -7,20 +7,22 @@
         changeComponent()"
     >
       <a>{{ title }}</a>
-      {{ id }}
     </div>
     <div :class="{ active: isActive }" class="content">
-      <swiperImg
+      <component :is="layout" :content="content" />
+
+      <!-- <swiperImg
         :articles="articles"
-      />
+      /> -->
     </div>
   </div>
 </template>
 
 <script>
-import SwiperImg from './swiperImg.vue'
+import Bio from './Bio.vue'
+import SwiperImg from './SwiperImg.vue'
 export default {
-  components: { SwiperImg },
+  components: { SwiperImg, Bio },
   props: {
     title: {
       type: String,
@@ -30,14 +32,17 @@ export default {
       type: Boolean,
       default: false
     },
-    articles: {
-      type: Array,
-      default: null
+    content: {
     }
 
   },
   data () {
     return {
+    }
+  },
+  computed: {
+    layout () {
+      return this.content.layout ?? 'SwiperImg'
     }
   },
   methods: {

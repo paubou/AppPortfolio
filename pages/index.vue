@@ -1,9 +1,8 @@
 <template>
-  <main>
+  <main :style="{'--randomcolor': color} ">
     <Transition>
       <div v-if="introOpened" class="imageIntro" @click="introOpened = false">
         <Intro />
-        <Colors />
       </div>
     </Transition>
 
@@ -20,12 +19,12 @@
           <CategoryWrapper
             :title="categoryKey"
             :is-active="categoryKey === activeCategory"
-            :articles=" filteredArticles"
+            :content=" filteredArticles"
             @listenButtonEvent="changeCategory(categoryKey)"
           />
         </section>
       </div>
-      <class class="right">
+      <div class="right">
         <section
           v-for="(filteredArticles, categoryKey, index) in Second"
           :id="'item' + index"
@@ -34,11 +33,11 @@
           <CategoryWrapper
             :title="categoryKey"
             :is-active="categoryKey === activeCategory"
-            :articles=" filteredArticles"
+            :content=" filteredArticles"
             @listenButtonEvent="changeCategory(categoryKey)"
           />
         </section>
-      </class>
+      </div>
     </div>
   </main>
 </template>
@@ -46,14 +45,13 @@
 <script>
 import CategoryWrapper from '~/components/CategoryWrapper.vue'
 import Intro from '~/components/Intro.vue'
-import Colors from '~/components/Colors.vue'
 export default {
-  components: { CategoryWrapper, Intro, Colors },
+  components: { CategoryWrapper, Intro },
 
   async asyncData ({ $content }) {
     const articles = await $content('', { deep: true })
       .sortBy('path', 'asc')
-      .only(['title', 'description', 'img', 'slug', 'informations', 'dir'])
+      // .only(['title', 'description', 'img', 'slug', 'informations', 'dir', 'layout', 'data'])
       .fetch()
     return { articles }
   },
@@ -70,17 +68,52 @@ export default {
     }
   },
   computed: {
+    color () {
+      const nuitjour = new Date()
+      const time = nuitjour.getHours()
+      let colors
+      if (time > 8 && time < 20) {
+        colors = [
+          '#979797',
+          '#ff1e00',
+          '#305b3f',
+          '#99733A',
+          '#5213c5'
+
+        ]
+        console.log('il est ' + time + 'h, ' + "c'est la nuit")
+      } else {
+        colors = [
+          'white',
+          '#6363FF',
+          '#FFDB0F',
+          '#728C97',
+          '#FF751F'
+        ]
+      }
+      const random = Math.floor(Math.random() * colors.length)
+      console.log(colors, random)
+      return colors[random]
+    },
     groupedCategories () {
       return this.articles.reduce((finalObject, obj) => {
-        const directory = obj.dir.slice(3)
-        finalObject[directory] ?? (finalObject[directory] = [])
-        finalObject[directory].push(obj)
+        let directory
+        if (obj.dir === '/') {
+          directory = obj.path.slice(3)
+          finalObject[directory] = obj
+        } else {
+          directory = obj.dir.slice(3)
+          finalObject[directory] ?? (finalObject[directory] = [])
+          finalObject[directory].push(obj)
+        }
+
+        // console.log(obj.dir)
         return finalObject
       }, {})
     },
     First () {
       console.log(Object.entries(this.groupedCategories))
-      return Object.fromEntries(Object.entries(this.groupedCategories).slice(0, 5))
+      return Object.fromEntries(Object.entries(this.groupedCategories).slice(0, 2))
     },
     Second () {
       console.log(Object.entries(this.groupedCategories))
@@ -111,6 +144,10 @@ export default {
 </script>
 
 <style>
+main{
+  --randomcolor : black;
+}
+
 .imageIntro{
   background:red;
 }
@@ -208,7 +245,7 @@ img{
 
 .right section:last-of-type{
   display: inline;
-  color:#ff1e00;
+   color:var(--randomcolor);
 }
 
 #item5 > .cat > .title {
