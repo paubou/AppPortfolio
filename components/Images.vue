@@ -16,7 +16,7 @@
           :data-informations=" article.informations"
           data-caption="text caption one"
         >
-          <img class="swiper-lazy" :data-src="require(`~/assets/${article.img}`)" alt="">
+          <img :data-src="require(`~/assets/${article.img}`)" class="swiper-lazy" :alt="article.title">
         </div>
       </div>
     </div>
@@ -65,7 +65,7 @@ export default {
       // loadOnTransitionStart: true
       loop: false,
       slidesPerView: 1,
-      // watchSlidesProgress: true,
+      watchSlidesProgress: true,
       spaceBetween: 0,
       speed: 400,
       autoHeight: true,
