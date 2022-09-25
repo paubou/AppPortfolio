@@ -10,19 +10,15 @@
     </div>
     <div :class="{ active: isActive }" class="content">
       <component :is="layout" :content="content" />
-
-      <!-- <swiperImg
-        :articles="articles"
-      /> -->
     </div>
   </div>
 </template>
 
 <script>
 import Bio from './Bio.vue'
-import SwiperImg from './SwiperImg.vue'
+import Images from './Images.vue'
 export default {
-  components: { SwiperImg, Bio },
+  components: { Images, Bio },
   props: {
     title: {
       type: String,
@@ -42,7 +38,7 @@ export default {
   },
   computed: {
     layout () {
-      return this.content.layout ?? 'SwiperImg'
+      return this.content.layout ?? 'Images'
     }
   },
   methods: {
