@@ -11,7 +11,11 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'Dans l’atelier, les murs étaient noirs et leurs mains aussi ; l’encre grasse avait tâché les poteaux jusqu’au plafond et les tabliers bleus.', name: 'Portfolio de Paul Bouigue', content: 'Dans l’atelier, les murs étaient noirs et leurs mains aussi ; l’encre grasse avait tâché les poteaux jusqu’au plafond et les tabliers bleus.' },
+      {
+        hid: 'description',
+        name: 'description',
+        content: 'Portfolio de Paul Bouigue — Dans l’atelier, les murs étaient noirs et leurs mains aussi ; l’encre grasse avait tâché les poteaux jusqu’au plafond et les tabliers bleus.'
+      },
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
@@ -46,6 +50,17 @@ export default {
   // Content module configuration: https://go.nuxtjs.dev/config-content
   content: {},
 
+  pwa: {
+    meta: {
+      theme_color: '#808000',
+      name: 'Paul Bouigue',
+      author: 'Paul Bouigue'
+    },
+    manifest: {
+      lang: 'fr',
+      name: 'Paul Bouigue Portfolio'
+    }
+  },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     // fix to work with swiperjs 8 - need to run with standalone:true. That can make some troubles.

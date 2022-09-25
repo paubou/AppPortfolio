@@ -3,7 +3,7 @@
     <img
       class="introduction"
       src="~/assets/intro/bienvenue.jpg"
-      alt="bienvenue"
+      alt="bienvenue, une liste de mots et d'action de dessine à l'écran, dans un caractère serif"
     >
   </transition>
 </template>

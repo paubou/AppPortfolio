@@ -6,7 +6,7 @@
       @click="
         changeComponent()"
     >
-      <a>{{ title }}</a>
+      <a href="">{{ title }}</a>
     </div>
     <div :class="{ active: isActive }" class="content">
       <component :is="layout" :content="content" />
