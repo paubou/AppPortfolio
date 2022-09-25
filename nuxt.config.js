@@ -4,19 +4,19 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'Accordeon',
+    title: 'Paul Bouigue',
     htmlAttrs: {
       lang: 'fr'
     },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
+      { hid: 'Dans l’atelier, les murs étaient noirs et leurs mains aussi ; l’encre grasse avait tâché les poteaux jusqu’au plafond et les tabliers bleus.', name: 'Portfolio de Paul Bouigue', content: 'Dans l’atelier, les murs étaient noirs et leurs mains aussi ; l’encre grasse avait tâché les poteaux jusqu’au plafond et les tabliers bleus.' },
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', href: 'https://unpkg.com/vue-agile/dist/VueAgile.css' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+
     ]
   },
 

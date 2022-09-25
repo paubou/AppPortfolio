@@ -1,6 +1,6 @@
 <template>
   <div class="images">
-    <div class="status">
+    <div class="project-title">
       {{ content[current].title }}
     </div>
     <div class="informations">
@@ -140,9 +140,9 @@ export default {
       // const textContentTitle = slider.slides[slider.activeIndex].dataset.title
       // const textContentInfos = slider.slides[slider.activeIndex].dataset.informations
       // console.log(textContentInfos + textContentTitle)
-      // const status = $refs.status
+      // const project-title = $refs.project-title
       // const informations = $refs.informations
-      // status.textContent = textContentTitle
+      // project-title.textContent = textContentTitle
       // informations.textContent = textContentInfos
     }
   }
@@ -200,7 +200,7 @@ export default {
   grid-gap: 0.2em;
 }
 
-.status{
+.project-title{
   grid-column: 3/7;
   grid-row: 1;
   pointer-events: none;
@@ -246,7 +246,7 @@ z-index: 0;
 .swiper-slide:nth-child(1n) {
 }
 
-.status{
+.project-title{
   position: relative;
 z-index: 100;
 color: var(--randomcolor);
@@ -259,5 +259,60 @@ z-index: 0;
   color: var(--randomcolor);
   font-family: serif;
   mix-blend-mode: difference;
+}
+
+@media (max-width: 1024px) {
+  .images{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  .swiper{
+    grid-column: 1/7;
+  }
+
+.custom-swiper-button-prev {
+  grid-row: 1;
+  grid-column: 1/2;
+  z-index: 100;
+  background: orange;
+}
+
+.custom-swiper-button-next {
+  grid-row: 1;
+  grid-column: 5/6;
+  z-index: 100;
+  background: orange;
+}
+
+.project-title{
+  grid-column: 1/7;
+  grid-row: 2;
+  text-align: center;
+  pointer-events: none;
+}
+
+.informations {
+    grid-column: 1/7;
+  grid-row: 3;
+  text-align: center;
+  font-style: italic;
+}
+
+.swiper-slide {
+  width: auto;
+  top: 2em;
+}
+
+.swiper-slide img{
+  height: auto;
+  width: 100%;
+}
+
+.swiper-pagination{
+  grid-column: 1/4;
+
+}
+
 }
 </style>

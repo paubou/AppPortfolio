@@ -22,4 +22,11 @@ export default {
         width: 60vw;
     }
 
+    @media (max-width: 1024px) {
+      img.introduction{
+        margin: 0em;
+        width: 98%;
+    }
+}
+
 </style>

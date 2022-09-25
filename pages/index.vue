@@ -7,9 +7,6 @@
     </Transition>
 
     <div v-show="!introOpened" class="container">
-      <p class="thanks">
-        thanks to <a href="https://snai.pe">snaipe uwu</a>
-      </p>
       <div class="left">
         <section
           v-for="(filteredArticles, categoryKey, index) in First"
@@ -113,7 +110,7 @@ export default {
     },
     First () {
       console.log(Object.entries(this.groupedCategories))
-      return Object.fromEntries(Object.entries(this.groupedCategories).slice(0, 2))
+      return Object.fromEntries(Object.entries(this.groupedCategories).slice(0, 5))
     },
     Second () {
       console.log(Object.entries(this.groupedCategories))
@@ -144,12 +141,27 @@ export default {
 </script>
 
 <style>
+
+@media (prefers-color-scheme: dark) {
+  :root{
+ --background: rgb(16, 16, 17);
+ --text: darkolivegreen;
+  }
+
+}
+
+@media (prefers-color-scheme: light) {
+  :root{
+ --background: rgb(240, 240, 240);
+ --text: rgb(189, 183, 107);;
+  }
+
+}
 main{
   --randomcolor : black;
 }
 
 .imageIntro{
-  background:red;
 }
 
 .title.active{
@@ -160,8 +172,9 @@ main{
  body{
   font-family:sans-serif;
   font-weight: normal;
-  color: rgb(189, 183, 107);
-  background-color:rgb(240, 240, 240);
+  color: var(--text);
+  background: var(--background);
+  /* background-color:rgb(240, 240, 240); */
   font-size: 1.25rem;
 line-height: 1.25rem;
 
@@ -260,5 +273,26 @@ img{
     .v-leave-to {
          opacity: 0;
     }
+
+    @media (max-width: 1024px) {
+      .container{
+        grid-template-columns: repeat(1, 1fr)
+      }
+
+  body{
+    font-size: 2rem;
+line-height: 2rem;
+  }
+
+  .content.active {
+    width: 100%;
+  }
+
+  .right{
+    grid-row: 2;
+    grid-column: 1;
+  }
+
+}
 
 </style>
