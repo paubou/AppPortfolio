@@ -295,4 +295,8 @@ img{
 
 }
 
+a{
+  text-decoration-style: dotted;
+}
+
 </style>

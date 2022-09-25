@@ -1,11 +1,11 @@
 <template>
   <div class="images">
-    <div class="project-title">
+    <a class="project-title">
       {{ content[current].title }}
-    </div>
-    <div class="informations">
+    </a>
+    <a class="informations">
       {{ content[current].informations }}
-    </div>
+    </a>
     <div ref="swiper" class="swiper mySwiper">
       <div class="swiper-wrapper">
         <div
@@ -136,14 +136,6 @@ export default {
         this.$data.current = current
       }
       console.log(current, slider.activeIndex)
-
-      // const textContentTitle = slider.slides[slider.activeIndex].dataset.title
-      // const textContentInfos = slider.slides[slider.activeIndex].dataset.informations
-      // console.log(textContentInfos + textContentTitle)
-      // const project-title = $refs.project-title
-      // const informations = $refs.informations
-      // project-title.textContent = textContentTitle
-      // informations.textContent = textContentInfos
     }
   }
 }
@@ -154,7 +146,7 @@ export default {
   width: 100%;
   grid-column: 1/7;
   grid-row: 1;
-  height: 100%;
+  /* height: 100%; */
 
 }
 .swiper-wrapper {
@@ -164,7 +156,7 @@ export default {
   width: auto;
   align-items: center;
   justify-content: center;
-  border-radius: 18px;
+  /* border-radius: 18px; */
   font-size: 22px;
   font-weight: bold;
   color: #fff;
@@ -176,8 +168,7 @@ export default {
 }
 
 .swiper-slide img {
-  height: 42vw;
-  width: auto;
+  height: auto;
       }
 
 .swiper-slide-visible,
@@ -204,6 +195,10 @@ export default {
   grid-column: 3/7;
   grid-row: 1;
   pointer-events: none;
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 2px;
 }
 
 .informations {
@@ -214,7 +209,7 @@ export default {
 
 .custom-swiper-button-prev, .custom-swiper-button-next {
   position: relative;
-opacity: 0;
+  opacity: 0;
 
 }
 
@@ -222,9 +217,9 @@ opacity: 0;
   grid-row: 1;
   grid-column: 1/3;
   bottom:0px;
-color: var(--randomcolor);
-mix-blend-mode: difference;
-z-index: 0;
+  color: var(--randomcolor);
+  mix-blend-mode: difference;
+  z-index: 0;
 }
 
 .custom-swiper-button-prev {
@@ -235,8 +230,7 @@ z-index: 0;
 
 .custom-swiper-button-next {
   grid-row: 1;
-  grid-column: 6/7
-;
+  grid-column: 6/7;
   z-index: 100;
 }
 
@@ -262,6 +256,10 @@ z-index: 0;
 }
 
 @media (max-width: 1024px) {
+.swiper-wrapper{
+  /* height: auto; */
+}
+
   .images{
     display: grid;
     grid-template-columns: repeat(6, 1fr);
@@ -275,14 +273,14 @@ z-index: 0;
   grid-row: 1;
   grid-column: 1/2;
   z-index: 100;
-  background: orange;
+  display: none;
 }
 
 .custom-swiper-button-next {
   grid-row: 1;
   grid-column: 5/6;
   z-index: 100;
-  background: orange;
+  display: none;
 }
 
 .project-title{
@@ -293,6 +291,7 @@ z-index: 0;
   text-decoration-thickness: 0.09em;
   text-align: center;
   pointer-events: none;
+  text-underline-offset: 4px;
 }
 
 .informations {
