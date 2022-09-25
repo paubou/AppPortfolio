@@ -280,8 +280,8 @@ img{
       }
 
   body{
-    font-size: 1.8rem;
-    line-height: 1.9rem;
+    font-size: 1.7rem;
+    line-height: 1.8rem;
   }
 
   .content.active {

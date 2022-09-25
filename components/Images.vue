@@ -286,14 +286,18 @@ z-index: 0;
 }
 
 .project-title{
+  line-height: 1;
   grid-column: 1/7;
   grid-row: 2;
+  text-decoration-style: dotted;
+  text-decoration-thickness: 0.09em;
   text-align: center;
   pointer-events: none;
 }
 
 .informations {
-    grid-column: 1/7;
+  text-decoration-style: solid;
+  grid-column: 1/7;
   grid-row: 3;
   text-align: center;
   font-style: italic;
@@ -301,7 +305,7 @@ z-index: 0;
 
 .swiper-slide {
   width: auto;
-  top: 2em;
+  top: 1.5em;
 }
 
 .swiper-slide img{
@@ -310,9 +314,9 @@ z-index: 0;
 }
 
 .swiper-pagination{
-  grid-column: 1/4;
+  grid-column: 1/7;
+  text-align: center;
 
 }
-
 }
 </style>
