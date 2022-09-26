@@ -58,7 +58,11 @@ export default {
       // Disable preloading of all images
       preloadImages: false,
       // Enable lazy loading
-      lazy: true,
+      lazy: {
+        loadPrevNext: true,
+        loadOnTransitionStart: true
+
+      },
       // loopedSlides: 3,
       initialSlide: 0,
       loadPrevNext: true,
