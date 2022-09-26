@@ -6,7 +6,11 @@
       @click="
         changeComponent()"
     >
-      <a href="#temp">{{ title }}</a>
+      <a :href="'#' + title">
+        <Letterize>
+          {{ title }}
+        </Letterize>
+      </a>
     </div>
     <div :class="{ active: isActive }" class="content">
       <component :is="layout" :content="content" />
@@ -17,8 +21,9 @@
 <script>
 import Bio from './Bio.vue'
 import Images from './Images.vue'
+import Letterize from './Letterize'
 export default {
-  components: { Images, Bio },
+  components: { Images, Bio, Letterize },
   props: {
     title: {
       type: String,

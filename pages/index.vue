@@ -78,7 +78,7 @@ export default {
           '#5213c5'
 
         ]
-        console.log('il est ' + time + 'h, ' + "c'est la nuit")
+        // console.log('il est ' + time + 'h, ' + "c'est la nuit")
       } else {
         colors = [
           'white',
@@ -89,7 +89,7 @@ export default {
         ]
       }
       const random = Math.floor(Math.random() * colors.length)
-      console.log(colors, random)
+      // console.log(colors, random)
       return colors[random]
     },
     groupedCategories () {
@@ -109,11 +109,9 @@ export default {
       }, {})
     },
     First () {
-      console.log(Object.entries(this.groupedCategories))
       return Object.fromEntries(Object.entries(this.groupedCategories).slice(0, 5))
     },
     Second () {
-      console.log(Object.entries(this.groupedCategories))
       return Object.fromEntries(Object.entries(this.groupedCategories).slice(5, 9))
     }
 
@@ -124,7 +122,7 @@ export default {
         this.activeCategory = null
       } else {
         this.activeCategory = key
-        console.log(this)
+        // console.log(this)
       }
       // this.isActive = !this.isActive
     },

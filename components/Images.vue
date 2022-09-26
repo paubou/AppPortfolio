@@ -4,7 +4,9 @@
       {{ content[current].title }}
     </a>
     <a class="informations">
-      {{ content[current].informations }}
+      <Letterize>
+        {{ content[current].informations }}
+      </Letterize>
     </a>
     <div ref="swiper" class="swiper mySwiper">
       <div class="swiper-wrapper">
@@ -37,7 +39,9 @@
 // add or remove unused modules
 import { Swiper, Navigation, Pagination, EffectCards, Autoplay, Keyboard, Mousewheel, Lazy } from 'swiper'
 import 'swiper/swiper-bundle.min.css'
+import Letterize from './Letterize.vue'
 export default {
+  components: { Letterize },
   props: {
     content: {
       type: Array,
@@ -50,10 +54,6 @@ export default {
     }
   },
   mounted () {
-    // configure Swiper to use modules. The modules were tested with SwiperJS v6.8.4 with NuxtJS v2.15.7
-    // previously it was before export default. Moved here for performance issues. Move back in case of problems.
-    // init Swiper:  eslint-disable used for deleting error of unsued const swiper
-    /* eslint-disable no-unused-vars */
     const swiper = new Swiper(this.$refs.swiper, {
       // Disable preloading of all images
       preloadImages: false,
@@ -63,10 +63,8 @@ export default {
       initialSlide: 0,
       loadPrevNext: true,
       loadOnTransitionStart: true,
-      // loadOnTransitionStart: true
       loop: false,
       slidesPerView: 1,
-      watchSlidesProgress: true,
       spaceBetween: 0,
       speed: 500,
       autoHeight: true,
@@ -89,13 +87,11 @@ export default {
         enabled: true,
         onlyInViewport: true
       },
-
       mousewheel: {
         invert: false,
         forceToAxis: true,
         sensitivity: 500,
         thresholdDelta: 10
-
       },
       on: {
         init (slider) {
@@ -104,39 +100,15 @@ export default {
         }
       }
     })
-
     swiper.on('slideChange', this.onSlideChange)
   },
   methods: {
     onSlideChange (slider) {
       const current = slider.activeIndex
       const slidesLength = this.$props.content.length
-      // const total = slider.params.loop
-      //   ? Math.ceil((slidesLength - slider.loopedSlides * 2) / slider.params.slidesPerGroup)
-      //   : slider.snapGrid.length
-
-      // if (slider.params.loop) {
-      //   current = Math.ceil(
-      //     (slider.activeIndex - slider.loopedSlides) / slider.params.slidesPerGroup
-      //   )
-      //   console.log(current)
-      //   if (current > slidesLength - 1 - slider.loopedSlides * 2) {
-      //     current -= slidesLength - slider.loopedSlides * 2
-      //   }
-      //   console.log(current)
-      //   if (current > total - 1) { current -= total }
-      //   console.log(current)
-      //   if (current < 0 && slider.params.paginationType !== 'bullets') { current = total + current }
-      //   console.log(current)
-      // } else if (typeof slider.snapIndex !== 'undefined') {
-      //   current = slider.snapIndex
-      // } else {
-      //   current = slider.activeIndex || 0
-      // }
       if (current < slidesLength) {
         this.$data.current = current
       }
-      console.log(current, slider.activeIndex)
     }
   }
 }
@@ -148,10 +120,10 @@ export default {
   grid-column: 1/7;
   grid-row: 1;
   /* height: 100%; */
+  margin: 1em 0 0 0 ;
 
 }
 .swiper-wrapper {
-  width: 50%;
 }
 .swiper-slide {
   width: auto;
@@ -161,7 +133,6 @@ export default {
   font-size: 22px;
   font-weight: bold;
   color: #fff;
-  top: 1em;
 }
 
 .swiper-content{
@@ -268,6 +239,7 @@ z-index: 0;
 
   .swiper{
     grid-column: 1/7;
+    margin-top: 1em;
   }
 
 .custom-swiper-button-prev {
@@ -305,7 +277,7 @@ z-index: 0;
 
 .swiper-slide {
   width: auto;
-  top: 1.5em;
+  /* top: 1.5em; */
 }
 
 .swiper-slide img{
