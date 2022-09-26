@@ -142,6 +142,11 @@ export default {
 
 <style>
 
+  @font-face {
+    font-family: "Arial-Slanted";
+    src: url(~assets/fonts/Arial-Slanted.woff2) format("woff2");
+  }
+
 @media (prefers-color-scheme: dark) {
   :root{
  --background: rgb(16, 16, 17);
@@ -153,7 +158,7 @@ export default {
 @media (prefers-color-scheme: light) {
   :root{
  --background: rgb(240, 240, 240);
- --text: rgb(189, 183, 107);;
+ --text: rgb(189, 183, 107);
   }
 
 }
@@ -186,9 +191,7 @@ a{
   margin: 0;
 }
 
-.thanks {
-  position: fixed;
-  right: 0.2em;
+.biography a:hover{
 }
 
 .active>a{
@@ -219,7 +222,7 @@ p{
 }
 
 a:hover{
-  cursor: pointer;
+  font-style: italic;
 }
 
 /* .cat{
@@ -256,8 +259,8 @@ img{
   width:100%;
 }
 
-.right section:last-of-type{
-  display: inline;
+.right section:last-of-type a{
+   display: inline;
    color:var(--randomcolor);
 }
 
@@ -288,15 +291,16 @@ img{
     width: 100%;
   }
 
+  .right section .content, .right section .content.active{
+    top: -1em;
+  }
+
   .right{
     grid-row: 2;
     grid-column: 1;
+
   }
 
-}
-
-a{
-  text-decoration-style: dotted;
 }
 
 </style>

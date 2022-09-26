@@ -18,6 +18,7 @@ export default {
   grid-gap: 10px;
   grid-auto-rows: minmax(100px, auto);
 }
+
 .b-left{
   color:darkolivegreen;
   grid-column: 1/3;
@@ -25,6 +26,7 @@ export default {
 }
 
 .b-center{
+  font-family: "Arial-Slanted";
   mix-blend-mode: difference;
   color:darkolivegreen;
   grid-column: 3/3;
@@ -45,13 +47,31 @@ export default {
   grid-column: 4/6;
 }
 
-.right .content.active:last-child{
-  top: 0em;
+.right section:last-child{
   width: 80vw;
 }
 
-.right .content:last-child{
-  top: 0em;
+.right section:last-child .content{
+  top: 0em !important;
+}
+
+@media (max-width: 1024px) {
+  .biography.nuxt-content{
+    grid-template-columns: repeat(1, auto);
+  }
+
+  .b-right{
+    grid-column: 1;
+  }
+
+  .b-left{
+    grid-column: 1;
+  }
+
+  .b-center{
+    grid-column: 1;
+  }
+
 }
 
 </style>

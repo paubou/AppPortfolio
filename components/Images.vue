@@ -62,12 +62,13 @@ export default {
       // loopedSlides: 3,
       initialSlide: 0,
       loadPrevNext: true,
+      loadOnTransitionStart: true,
       // loadOnTransitionStart: true
       loop: false,
       slidesPerView: 1,
       watchSlidesProgress: true,
       spaceBetween: 0,
-      speed: 400,
+      speed: 500,
       autoHeight: true,
       grabCursor: true,
       // remove unused modules if needed

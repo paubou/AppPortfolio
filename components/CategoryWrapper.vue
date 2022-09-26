@@ -6,7 +6,7 @@
       @click="
         changeComponent()"
     >
-      <a>{{ title }}</a>
+      <a href="#temp">{{ title }}</a>
     </div>
     <div :class="{ active: isActive }" class="content">
       <component :is="layout" :content="content" />
@@ -53,6 +53,11 @@ export default {
 <style>
 .title.active{
   color:brown;
+}
+
+a{
+  text-decoration: none;
+  color: var(--text)
 }
 
 </style>
