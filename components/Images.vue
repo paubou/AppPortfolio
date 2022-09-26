@@ -60,7 +60,8 @@ export default {
       // Enable lazy loading
       lazy: {
         loadPrevNext: true,
-        loadOnTransitionStart: true
+        loadOnTransitionStart: true,
+        loadPrevNextAmount: 2
 
       },
       // loopedSlides: 3,

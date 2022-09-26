@@ -71,11 +71,13 @@ export default {
       let colors
       if (time > 8 && time < 20) {
         colors = [
-          '#979797',
-          '#ff1e00',
-          '#305b3f',
-          '#99733A',
-          '#5213c5'
+          '#979797', // gris
+          '#ff1e00', // orange
+          '#305b3f', // vert foncé
+          '#99733A', // or
+          '#5213c5', // marron
+          '#652918', // violet
+          '#48A7C9' // bleu
 
         ]
         // console.log('il est ' + time + 'h, ' + "c'est la nuit")
@@ -188,7 +190,10 @@ a{
   font-size: 1em;
   margin: 0;
 }
-
+sup{
+  position: relative;
+  vertical-align: baseline;
+}
 .biography a:hover{
 }
 

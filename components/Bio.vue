@@ -5,8 +5,7 @@
 <script>
 export default {
   props: {
-    content: {
-    }
+    content: {}
   }
 }
 </script>
@@ -47,7 +46,7 @@ export default {
   grid-column: 4/6;
 }
 
-.right section:last-child{
+.right section:last-child .active{
   width: 80vw;
 }
 
