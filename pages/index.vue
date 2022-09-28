@@ -72,11 +72,10 @@ export default {
       if (time > 8 && time < 20) {
         colors = [
           '#979797', // gris
-          '#ff1e00', // orange
           '#305b3f', // vert foncé
           '#99733A', // or
-          '#5213c5', // marron
-          '#652918', // violet
+          '#8355D7', // violet pale
+          '#FF4000', // orange
           '#48A7C9' // bleu
 
         ]
@@ -141,6 +140,11 @@ export default {
 </script>
 
 <style>
+
+  ::selection{
+    background: brown;
+    color: brown;
+  }
 
   @font-face {
     font-family: "Arial-Slanted";

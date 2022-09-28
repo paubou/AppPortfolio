@@ -20,6 +20,7 @@ export default {
         margin: 0.2em;
         position: absolute;
         width: 60vw;
+        cursor: pointer;
     }
 
     @media (max-width: 1024px) {

@@ -192,7 +192,7 @@ export default {
 
 .swiper-pagination{
   grid-row: 1;
-  grid-column: 1/3;
+  grid-column: 2/3;
   bottom:0px;
   color: var(--randomcolor);
   mix-blend-mode: difference;
@@ -221,7 +221,7 @@ export default {
   position: relative;
 z-index: 100;
 color: var(--randomcolor);
-z-index: 0;
+z-index: 100;
 
 }
 
@@ -230,6 +230,7 @@ z-index: 0;
   color: var(--randomcolor);
   font-family: serif;
   mix-blend-mode: difference;
+  z-index: 100;
 }
 
 @media (max-width: 1024px) {
