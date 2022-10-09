@@ -153,7 +153,8 @@ export default {
 .swiper-slide-duplicate-prev,
 .swiper-slide-duplicate,
 .swiper-slide-duplicate-next{
-   opacity: 0.5;
+   /* opacity: 0.5; */
+   filter: hue-rotate(90deg);
    transition: all 200ms ease;
 }
 
