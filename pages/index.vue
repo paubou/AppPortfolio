@@ -155,6 +155,7 @@ export default {
   :root{
  --background: rgb(16, 16, 17);
  --text: darkolivegreen;
+ --mode : luminosity;
   }
 
 }
@@ -163,6 +164,7 @@ export default {
   :root{
  --background: rgb(240, 240, 240);
  --text: rgb(189, 183, 107);
+ --mode: difference;
   }
 
 }

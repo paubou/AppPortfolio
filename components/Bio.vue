@@ -26,7 +26,7 @@ export default {
 
 .b-center{
   font-family: "Arial-Slanted";
-  mix-blend-mode: difference;
+  mix-blend-mode: var(--mode);
   color:darkolivegreen;
   grid-column: 3/3;
   text-align: center;
@@ -57,6 +57,7 @@ export default {
 @media (max-width: 1024px) {
   .biography.nuxt-content{
     grid-template-columns: repeat(1, auto);
+    row-gap: 2em;
   }
 
   .b-right{
@@ -70,6 +71,10 @@ export default {
   .b-center{
     grid-column: 1;
   }
+
+  .right section:last-child .active{
+  width: 100%;
+}
 
 }
 

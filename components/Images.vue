@@ -95,7 +95,7 @@ export default {
       mousewheel: {
         invert: false,
         forceToAxis: true,
-        sensitivity: 500,
+        sensitivity: 1000,
         thresholdDelta: 10
       },
       on: {
@@ -195,7 +195,7 @@ export default {
   grid-column: 2/3;
   bottom:0px;
   color: var(--randomcolor);
-  mix-blend-mode: difference;
+  mix-blend-mode: var(--mode);
   z-index: 0;
 }
 
@@ -229,7 +229,7 @@ z-index: 100;
   font-weight: normal;
   color: var(--randomcolor);
   font-family: serif;
-  mix-blend-mode: difference;
+  mix-blend-mode: var(--mode);
   z-index: 100;
 }
 
@@ -292,7 +292,7 @@ z-index: 100;
 }
 
 .swiper-pagination{
-  grid-column: 1/7;
+  grid-column: 3/7;
   text-align: center;
 
 }
